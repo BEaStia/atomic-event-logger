@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{64379F85-0767-46A4-A13F-1A6CA9092CA2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AnomalEvent</RootNamespace>
+    <AssemblyName>AnomalEvent</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>AnomalEvent.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\SqlMapper.cs" />
+    <Compile Include="Classes\SqlMapperExtensions.cs" />
+    <Compile Include="Classes\User.cs" />
+    <Compile Include="Controls\CommonInformationEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CommonInformationEditControl.Designer.cs">
+      <DependentUpon>CommonInformationEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CreateReportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CreateReportControl.Designer.cs">
+      <DependentUpon>CreateReportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FormularINESControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\FormularINESControl.Designer.cs">
+      <DependentUpon>FormularINESControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CausesViolationReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CausesViolationReportForm.Designer.cs">
+      <DependentUpon>CausesViolationReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ConsequenceViolationReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ConsequenceViolationReportForm.Designer.cs">
+      <DependentUpon>ConsequenceViolationReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CorrectiveActionReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CorrectiveActionReportForm.Designer.cs">
+      <DependentUpon>CorrectiveActionReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\GuestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GuestForm.Designer.cs">
+      <DependentUpon>GuestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Formular.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Formular.Designer.cs">
+      <DependentUpon>Formular.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InformationCardReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InformationCardReportForm.Designer.cs">
+      <DependentUpon>InformationCardReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainPageReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainPageReportForm.Designer.cs">
+      <DependentUpon>MainPageReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\JournalEventForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\JournalEventForm.Designer.cs">
+      <DependentUpon>JournalEventForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Forms\ProgressAddEventForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProgressAddEventForm.Designer.cs">
+      <DependentUpon>ProgressAddEventForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\CommonInformationEditControl.resx">
+      <DependentUpon>CommonInformationEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CreateReportControl.resx">
+      <DependentUpon>CreateReportControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\FormularINESControl.resx">
+      <DependentUpon>FormularINESControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CausesViolationReportForm.resx">
+      <DependentUpon>CausesViolationReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ConsequenceViolationReportForm.resx">
+      <DependentUpon>ConsequenceViolationReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CorrectiveActionReportForm.resx">
+      <DependentUpon>CorrectiveActionReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GuestForm.resx">
+      <DependentUpon>GuestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Formular.resx">
+      <DependentUpon>Formular.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InformationCardReportForm.resx">
+      <DependentUpon>InformationCardReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainPageReportForm.resx">
+      <DependentUpon>MainPageReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\JournalEventForm.resx">
+      <DependentUpon>JournalEventForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProgressAddEventForm.resx">
+      <DependentUpon>ProgressAddEventForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\execute.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database1.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database1_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>Database1.mdf</DependentUpon>
+    </Content>
+    <Content Include="x64\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль .NET Framework 3.5 с пакетом обновления 1 %28SP1%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
