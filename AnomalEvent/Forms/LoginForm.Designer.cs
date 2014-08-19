@@ -132,6 +132,7 @@
             this.HelpButton = true;
             this.Name = "LoginForm";
             this.Text = "Вход в систему";
+            this.Load += new System.EventHandler(this.LoginForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

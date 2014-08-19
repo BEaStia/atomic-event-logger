@@ -42,10 +42,7 @@ namespace AnomalEvent.Forms
             {
                 
                 Authorizer.Instance = Authorizer.GetUser(textBox1.Text);
-                var eventform = new JournalEventForm();
-                eventform.Show();
-                eventform.Closed += eventform_Closed;
-                this.Hide();
+                ShowEvents();  
             }
             else
             {
@@ -53,6 +50,14 @@ namespace AnomalEvent.Forms
                 label3.BackColor = Color.White;
                 label3.Text = "Неверные данные!";
             }
+        }
+
+        void ShowEvents()
+        {
+            var eventform = new JournalEventForm();
+            eventform.Show();
+            eventform.Closed += eventform_Closed;
+            this.Hide();
         }
 
         void eventform_Closed(object sender, EventArgs e)
@@ -67,8 +72,10 @@ namespace AnomalEvent.Forms
 
         private void helpButton_Click(object sender, EventArgs e)
         {
-            GuestForm guessform = new GuestForm();
-            guessform.ShowDialog();
+//            GuestForm guessform = new GuestForm();
+//            guessform.ShowDialog();
+            Authorizer.Instance = new User(){Guest = 1};
+            ShowEvents();
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -84,6 +91,11 @@ namespace AnomalEvent.Forms
         private void textBox1_MouseClick(object sender, MouseEventArgs e)
         {
             label3.Text = "";
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -30,7 +29,7 @@ namespace AnomalEvent
         void addEventForm_Closed(object sender, EventArgs e)
         {
             this.Refresh();
-            //Update();
+            Update();
         }
 
 
@@ -62,9 +61,8 @@ namespace AnomalEvent
             ProgressAddEventForm addEventForm = new ProgressAddEventForm();
             DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
             List<AnEvent> events = AnEvent.getList();
-            //int id = events.Select( x => int.Parse(row.Cells["id"].Value.ToString())).First();
-            var obj = from _event in events where _event.Id == int.Parse(row.Cells["id"].Value.ToString()) select _event;
-            addEventForm.Ev = obj.First() as AnEvent;
+            var obj = events.Where((x) => x.Id == int.Parse(row.Cells["id"].Value.ToString())).First();
+            addEventForm.Ev = obj;
             addEventForm.Closed += addEventForm_Closed;
             addEventForm.ShowDialog();
         }
@@ -96,7 +94,13 @@ namespace AnomalEvent
         private void button1_Click(object sender, EventArgs e)
         {
             var id = int.Parse(textBox1.Text);
+            var list = from _event in AnEvent.getList() where _event.Id == id select _event;
+            var _Event = list.First();
 
+            ProgressAddEventForm addEventForm = new ProgressAddEventForm();
+            addEventForm.Ev = _Event;
+            addEventForm.Closed += addEventForm_Closed;
+            addEventForm.ShowDialog();
         }
 
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -105,6 +109,11 @@ namespace AnomalEvent
             addEventForm.Ev = AnEvent.getList()[int.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString())];
             addEventForm.Closed += addEventForm_Closed;
             addEventForm.ShowDialog();
+        }
+
+        private void bndMain_RefreshItems(object sender, EventArgs e)
+        {
+
         }
 	}
 }

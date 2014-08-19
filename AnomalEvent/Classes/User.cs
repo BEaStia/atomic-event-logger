@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 using Dapper;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,20 @@ namespace AnomalEvent.Classes
     {
         public static String SQLConnection = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=C:\\AnomalEventSolution\\AnomalEvent\\Database1.mdf;Integrated Security=True";
         private static SqlConnection connection;
+
+        public static Boolean CreateConnection()
+        {
+            try
+            {
+                var conn = Connection;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Возникла проблема при подключении к базе данных");
+                return false;
+            }
+            return true;
+        }
         public static SqlConnection Connection
         {
             get
@@ -19,8 +34,16 @@ namespace AnomalEvent.Classes
                 if (connection == null)
                 {
                     connection = new SqlConnection(SQLConnection);
-                    connection.Open();
-                    
+                    try
+                    {
+                        connection.Open();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Возникла проблема подключения к Базе Данных");
+                        Application.Exit();
+                    }
+
                 }
                 return connection;
             }

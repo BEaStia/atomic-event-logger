@@ -30,7 +30,6 @@ namespace AnomalEvent
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.lblProgressStatus = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.ClassifiedByComboBox = new System.Windows.Forms.ComboBox();
             this.DepartmentComboBox = new System.Windows.Forms.ComboBox();
@@ -50,17 +49,9 @@ namespace AnomalEvent
             this.butOk = new System.Windows.Forms.Button();
             this.Formular = new System.Windows.Forms.Button();
             this.ReportButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lblProgressStatus
-            // 
-            this.lblProgressStatus.AutoSize = true;
-            this.lblProgressStatus.Location = new System.Drawing.Point(12, 9);
-            this.lblProgressStatus.Name = "lblProgressStatus";
-            this.lblProgressStatus.Size = new System.Drawing.Size(35, 13);
-            this.lblProgressStatus.TabIndex = 0;
-            this.lblProgressStatus.Text = "label1";
             // 
             // mainPanel
             // 
@@ -242,25 +233,35 @@ namespace AnomalEvent
             // 
             // ReportButton
             // 
-            this.ReportButton.Location = new System.Drawing.Point(96, 203);
+            this.ReportButton.Location = new System.Drawing.Point(96, 204);
             this.ReportButton.Name = "ReportButton";
-            this.ReportButton.Size = new System.Drawing.Size(75, 23);
+            this.ReportButton.Size = new System.Drawing.Size(110, 23);
             this.ReportButton.TabIndex = 5;
-            this.ReportButton.Text = "Отчет";
+            this.ReportButton.Text = "Прикрепить отчет";
             this.ReportButton.UseVisualStyleBackColor = true;
             this.ReportButton.Click += new System.EventHandler(this.ReportButton_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(212, 204);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(90, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Создать отчет";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ProgressAddEventForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 241);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.ReportButton);
             this.Controls.Add(this.Formular);
             this.Controls.Add(this.butOk);
             this.Controls.Add(this.butCancel);
             this.Controls.Add(this.mainPanel);
-            this.Controls.Add(this.lblProgressStatus);
             this.Name = "ProgressAddEventForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Создание события";
@@ -268,14 +269,12 @@ namespace AnomalEvent
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
 		}
 
 	    #endregion
 
-		private System.Windows.Forms.Label lblProgressStatus;
-		private System.Windows.Forms.Panel mainPanel;
+        private System.Windows.Forms.Panel mainPanel;
 		private System.Windows.Forms.Button butCancel;
 		private System.Windows.Forms.Button butOk;
         private System.Windows.Forms.DateTimePicker eventDate;
@@ -294,6 +293,7 @@ namespace AnomalEvent
         private System.Windows.Forms.ComboBox DepartmentComboBox;
         private System.Windows.Forms.ComboBox CategoryComboBox;
         private System.Windows.Forms.ComboBox RegisteredByComboBox;
+        private System.Windows.Forms.Button button1;
 
 	}
 }
