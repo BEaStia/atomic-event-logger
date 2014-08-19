@@ -1,11 +1,11 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using Dapper;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Dapper.Contrib.Extensions;
 
 namespace AnomalEvent.Classes
 {
@@ -52,7 +52,7 @@ namespace AnomalEvent.Classes
     }
     public class User
     {
-        [KeyAttribute]
+        [System.ComponentModel.DataAnnotations.Key]
         public int? Id { get; set; }
         public string Login { get; set; }
         public string Name { get; set; }
@@ -109,7 +109,7 @@ namespace AnomalEvent.Classes
 
     public class AnEvent
     {
-        [KeyAttribute]
+        [System.ComponentModel.DataAnnotations.Key]
         public int? Id { get; set; }
         public DateTime EventDateTime { get; set; }
         public int? DepartmentId { get; set; }
@@ -167,4 +167,5 @@ namespace AnomalEvent.Classes
             return list;
         }
     }
+
 }

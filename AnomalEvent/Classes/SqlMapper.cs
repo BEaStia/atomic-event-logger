@@ -1363,6 +1363,11 @@ this IDbConnection cnn, Type type, string sql, object param = null, IDbTransacti
             return command.Buffered ? data.ToList() : data;
         }
 
+        public static IEnumerable<T> GetAll<T>(this IDbConnection)
+        {
+            
+        } 
+
 
 
         /// <summary>
