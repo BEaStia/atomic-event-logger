@@ -115,5 +115,85 @@ namespace AnomalEvent
         {
 
         }
+
+        private void bindingNavigatorCountItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripSeparator1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorSeparator_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorPositionItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorSeparator1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorSeparator2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorFindButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorMoveFirstItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorMovePreviousItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorMoveNextItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorMoveLastItem_Click(object sender, EventArgs e)
+        {
+
+        }
 	}
 }

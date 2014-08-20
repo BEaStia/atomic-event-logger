@@ -22,5 +22,15 @@ namespace AnomalEvent.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\v11.0;AttachDbFilename=C:\\AnomalEventSolution\\AnomalEvent\\D" +
+            "atabase1.mdf;Integrated Security=True")]
+        public string DatabaseConnection {
+            get {
+                return ((string)(this["DatabaseConnection"]));
+            }
+        }
     }
 }

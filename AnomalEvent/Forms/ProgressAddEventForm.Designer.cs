@@ -49,6 +49,9 @@ namespace AnomalEvent
             this.butOk = new System.Windows.Forms.Button();
             this.Formular = new System.Windows.Forms.Button();
             this.ReportButton = new System.Windows.Forms.Button();
+            this.CreateReport = new System.Windows.Forms.Button();
+            this.OpenReportButton = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
@@ -202,9 +205,9 @@ namespace AnomalEvent
             // butCancel
             // 
             this.butCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butCancel.Location = new System.Drawing.Point(497, 206);
+            this.butCancel.Location = new System.Drawing.Point(511, 208);
             this.butCancel.Name = "butCancel";
-            this.butCancel.Size = new System.Drawing.Size(75, 23);
+            this.butCancel.Size = new System.Drawing.Size(61, 23);
             this.butCancel.TabIndex = 2;
             this.butCancel.Text = "Закрыть";
             this.butCancel.UseVisualStyleBackColor = true;
@@ -213,9 +216,9 @@ namespace AnomalEvent
             // butOk
             // 
             this.butOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butOk.Location = new System.Drawing.Point(416, 206);
+            this.butOk.Location = new System.Drawing.Point(461, 208);
             this.butOk.Name = "butOk";
-            this.butOk.Size = new System.Drawing.Size(75, 23);
+            this.butOk.Size = new System.Drawing.Size(44, 23);
             this.butOk.TabIndex = 3;
             this.butOk.Text = "Ок";
             this.butOk.UseVisualStyleBackColor = true;
@@ -223,7 +226,7 @@ namespace AnomalEvent
             // 
             // Formular
             // 
-            this.Formular.Location = new System.Drawing.Point(15, 204);
+            this.Formular.Location = new System.Drawing.Point(12, 206);
             this.Formular.Name = "Formular";
             this.Formular.Size = new System.Drawing.Size(75, 23);
             this.Formular.TabIndex = 4;
@@ -233,30 +236,62 @@ namespace AnomalEvent
             // 
             // ReportButton
             // 
-            this.ReportButton.Location = new System.Drawing.Point(96, 204);
+            this.ReportButton.Location = new System.Drawing.Point(209, 206);
             this.ReportButton.Name = "ReportButton";
-            this.ReportButton.Size = new System.Drawing.Size(110, 23);
+            this.ReportButton.Size = new System.Drawing.Size(77, 23);
             this.ReportButton.TabIndex = 5;
-            this.ReportButton.Text = "Прикрепить отчет";
+            this.ReportButton.Text = "Прикрепить";
             this.ReportButton.UseVisualStyleBackColor = true;
             this.ReportButton.Click += new System.EventHandler(this.ReportButton_Click);
             // 
+            // CreateReport
+            // 
+            this.CreateReport.Location = new System.Drawing.Point(144, 207);
+            this.CreateReport.Name = "CreateReport";
+            this.CreateReport.Size = new System.Drawing.Size(59, 23);
+            this.CreateReport.TabIndex = 6;
+            this.CreateReport.Text = "Создать";
+            this.CreateReport.UseVisualStyleBackColor = true;
+            this.CreateReport.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // OpenReportButton
+            // 
+            this.OpenReportButton.Location = new System.Drawing.Point(292, 207);
+            this.OpenReportButton.Name = "OpenReportButton";
+            this.OpenReportButton.Size = new System.Drawing.Size(61, 23);
+            this.OpenReportButton.TabIndex = 8;
+            this.OpenReportButton.Text = "Открыть";
+            this.OpenReportButton.UseVisualStyleBackColor = true;
+            this.OpenReportButton.Click += new System.EventHandler(this.OpenReportButton_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(93, 211);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(39, 13);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "Отчет:";
+            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(212, 204);
+            this.button1.Location = new System.Drawing.Point(359, 208);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Создать отчет";
+            this.button1.Size = new System.Drawing.Size(65, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "КорМеры";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // ProgressAddEventForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 241);
+            this.ClientSize = new System.Drawing.Size(584, 243);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.OpenReportButton);
+            this.Controls.Add(this.CreateReport);
             this.Controls.Add(this.ReportButton);
             this.Controls.Add(this.Formular);
             this.Controls.Add(this.butOk);
@@ -269,6 +304,7 @@ namespace AnomalEvent
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
 		}
 
@@ -293,6 +329,9 @@ namespace AnomalEvent
         private System.Windows.Forms.ComboBox DepartmentComboBox;
         private System.Windows.Forms.ComboBox CategoryComboBox;
         private System.Windows.Forms.ComboBox RegisteredByComboBox;
+        private System.Windows.Forms.Button CreateReport;
+        private System.Windows.Forms.Button OpenReportButton;
+        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button1;
 
 	}

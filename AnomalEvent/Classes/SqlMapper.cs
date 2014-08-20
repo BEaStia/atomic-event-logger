@@ -1362,14 +1362,6 @@ this IDbConnection cnn, Type type, string sql, object param = null, IDbTransacti
             var data = QueryImpl<T>(cnn, command, typeof(T));
             return command.Buffered ? data.ToList() : data;
         }
-
-        public static IEnumerable<T> GetAll<T>(this IDbConnection)
-        {
-            
-        } 
-
-
-
         /// <summary>
         /// Execute a command that returns multiple result sets, and access each in turn
         /// </summary>

@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Text;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -19,6 +20,8 @@ namespace AnomalEvent
 	{
 	    public AnEvent Ev;
 	    public List<User> users;
+        public List<Category> categories;
+        public List<Department> departments;
 		public ProgressAddEventForm()
 		{
 			InitializeComponent();
@@ -34,14 +37,25 @@ namespace AnomalEvent
             Ev.EventDateTime = (sender as DateTimePicker).Value;
         }
 
+	    private void Save()
+	    {
+            if (Authorizer.Instance.Guest != 1)
+            {
+                if (Ev.Id == null)
+                {
+                    SqlMapperExtensions.Insert(AnomalEventConnection.Connection, Ev);
+                }
+                else
+                {
+                    SqlMapperExtensions.Update(AnomalEventConnection.Connection, Ev);
+                }
+            }
+            
+	    }
+
         private void butOk_Click(object sender, EventArgs e)
         {
-            if (Ev.Id == null) {
-                SqlMapperExtensions.Insert(AnomalEventConnection.Connection, Ev);
-            }
-            else {
-                SqlMapperExtensions.Update(AnomalEventConnection.Connection, Ev);
-            }
+            Save();
             this.Close();
         }
 
@@ -56,11 +70,32 @@ namespace AnomalEvent
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.ShowDialog();
             Ev.Report = fileDialog.FileName;
+            
         }
+
+	    private void UpdateReportLabel()
+	    {
+	        if (Ev.Report != null && Ev.Report != "")
+	        {
+	            OpenReportButton.Enabled = true;
+	        }
+	        else
+	            OpenReportButton.Enabled = false;
+	    }
 
 	    private void ProgressAddEventForm_Load(object sender, EventArgs e)
 	    {
-
+	        if (Authorizer.Instance.Guest == 1)
+	        {
+	            this.ShortDescription.Enabled = false;
+	            this.CreateReport.Enabled = false;
+	            this.DepartmentComboBox.Enabled = false;
+	            this.reg_id.Enabled = false;
+	            this.CategoryComboBox.Enabled = false;
+	            this.ClassifiedByComboBox.Enabled = false;
+	            this.RegisteredByComboBox.Enabled = false;
+                this.ReportButton.Enabled = false;   
+	        }
 	        Boolean new_ev = true;
 	        if (this.Ev == null)
 	            Ev = new AnEvent();
@@ -75,12 +110,12 @@ namespace AnomalEvent
 	            RegisteredByComboBox.Items.Add(user.Name);
 	            ClassifiedByComboBox.Items.Add(user.Name);
 	        }
-	        List<Department> departments = Department.getList();
+	        departments = Department.getList();
 	        foreach (var department in departments)
 	        {
 	            DepartmentComboBox.Items.Add(department.Name);
 	        }
-	        List<Category> categories = Category.getList();
+	        categories = Category.getList();
 	        foreach (var category in categories)
 	        {
 	            CategoryComboBox.Items.Add(category.Name);
@@ -129,11 +164,13 @@ namespace AnomalEvent
 	        {
 	            this.eventDate.Value = DateTime.Now;
 	        }
+            UpdateReportLabel();
 	    }
 
 	    private void RegisteredByComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Ev.RegisteredBy = users[RegisteredByComboBox.SelectedIndex].Id;
+            var user = users.First(x => x.Name == (sender as ComboBox).SelectedItem.ToString());
+            Ev.RegisteredBy = user.Id;
         }
 
         private void reg_id_TextChanged(object sender, EventArgs e)
@@ -143,17 +180,21 @@ namespace AnomalEvent
 
         private void DepartmentComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Ev.DepartmentId = DepartmentComboBox.SelectedIndex;
+            var department = departments.First(x => x.Name == (sender as ComboBox).SelectedItem.ToString());
+            Ev.DepartmentId = department.Id;
         }
 
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var category = categories.First(x => x.Name == (sender as ComboBox).SelectedItem.ToString());
+            Ev.DepartmentId = category.Id;
             Ev.EventCategoryId = CategoryComboBox.SelectedIndex;
         }
 
         private void ClassifiedByComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Ev.ClassifiedBy = users[ClassifiedByComboBox.SelectedIndex].Id;
+            var user = users.First(x => x.Name == (sender as ComboBox).SelectedItem.ToString());
+            Ev.ClassifiedBy = user.Id;
         }
 
         private void ShortDescription_TextChanged(object sender, EventArgs e)
@@ -170,6 +211,36 @@ namespace AnomalEvent
         {
             MainPageReportForm mainPageReportForm = new MainPageReportForm();
             mainPageReportForm.ShowDialog();
+        }
+
+        private void OpenReportButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(Ev.Report);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (!this.Ev.Id.HasValue)
+            {
+                this.Save();
+            }
+            JournalMeasureForm measures = new JournalMeasureForm();
+            measures.EventId = this.Ev.Id.Value;
+            measures.Closed += measures_Closed;
+            measures.ShowDialog();
+            this.Hide();
+        }
+
+        void measures_Closed(object sender, EventArgs e)
+        {
+            this.Show();
         }
 	}
 }

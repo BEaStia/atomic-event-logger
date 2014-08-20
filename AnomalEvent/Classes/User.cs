@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using AnomalEvent.Properties;
 using Dapper;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace AnomalEvent.Classes
 {
     class AnomalEventConnection
     {
-        public static String SQLConnection = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=C:\\AnomalEventSolution\\AnomalEvent\\Database1.mdf;Integrated Security=True";
+        public static String SQLConnection = Settings.Default.DatabaseConnection;
         private static SqlConnection connection;
 
         public static Boolean CreateConnection()
@@ -33,6 +34,7 @@ namespace AnomalEvent.Classes
             {
                 if (connection == null)
                 {
+                    
                     connection = new SqlConnection(SQLConnection);
                     try
                     {
@@ -166,6 +168,26 @@ namespace AnomalEvent.Classes
                     FROM Departments").ToList();
             return list;
         }
+    }
+
+    public class CorrectiveAction
+    {
+        [System.ComponentModel.DataAnnotations.Key]
+        public int? Id { get; set; }
+
+        public String Name { get; set; }
+        public int? ExecutorId { get; set; }
+        public int? DepartmentId { get; set; }
+        public int? CuratorId { get; set; }
+        public DateTime DateEnd { get; set; }
+        public String Content { get; set; }
+        public String Compliance { get; set; }
+        public String FailReaason { get; set; }
+        public String ExecutionStatus { get; set; }
+        public int? EventId { get; set; }
+        public int? Finished { get; set; }
+        public String MemoNumber { get; set; }
+        public DateTime MemoDate { get; set; }
     }
 
 }
