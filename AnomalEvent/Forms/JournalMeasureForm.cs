@@ -46,11 +46,11 @@ namespace AnomalEvent.Forms
             if (EventId != null && EventId != 0)
             {
                 AnEvent anEvent = events.First(x => x.Id == this.EventId);
-                foreach (String item in comboBox3.Items)
+                foreach (int _id in comboBox3.Items)
                 {
-                    if (item == anEvent.Id.ToString())
+                    if (_id == anEvent.Id)
                     {
-                        comboBox3.SelectedIndex = comboBox3.Items.IndexOf(item);
+                        comboBox3.SelectedIndex = comboBox3.Items.IndexOf(_id);
                     }
                 }
             }
@@ -59,7 +59,7 @@ namespace AnomalEvent.Forms
         private void Update()
         {
             DataSet ds = new DataSet();
-            var sql = "select * from CorrectiveMeasure";
+            var sql = "select * from CorrectiveMeasures";
             SqlCommand command = new SqlCommand(sql, AnomalEventConnection.Connection);
             SqlDataAdapter da = new SqlDataAdapter(command);
             da.Fill(ds);
@@ -85,6 +85,11 @@ namespace AnomalEvent.Forms
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
                     
+        }
+
+        private void bndMain_RefreshItems(object sender, EventArgs e)
+        {
+
         }
 
 

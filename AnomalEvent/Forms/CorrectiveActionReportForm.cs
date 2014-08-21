@@ -14,7 +14,7 @@ namespace AnomalEvent.Forms
 {
 	public partial class CorrectiveActionReportForm : Form
 	{
-	    public CorrectiveAction Action;
+	    public CorrectiveMeasure Action;
 	    private List<Department> departments;
 	    private List<User> users;
 	    public AnEvent anEvent;
@@ -40,8 +40,9 @@ namespace AnomalEvent.Forms
                 dateTimePicker2.Enabled = false;
             }
             textBox2.Enabled = false;
-            departments = new List<Department>();
-            users = new List<User>();
+            departments = Department.getList();
+            users = User.getList().Where((x) => x.IsPerson == 1).ToList();
+
             foreach (var department in departments)
             {
                 comboBox3.Items.Add(department.Name);
@@ -86,13 +87,15 @@ namespace AnomalEvent.Forms
                 textBox3.Text = this.Action.MemoNumber;
                 richTextBox1.Text = this.Action.Content;
                 richTextBox2.Text = this.Action.Compliance;
-                richTextBox3.Text = this.Action.FailReaason;
+                richTextBox3.Text = this.Action.FailReason;
 
             }
             else
             {
-                Action = new CorrectiveAction();
+                Action = new CorrectiveMeasure();
                 Action.EventId = this.anEvent.Id;
+                Action.DateEnd = this.dateTimePicker1.Value;
+                Action.MemoDate = this.dateTimePicker1.Value;
             }
 
         }
@@ -126,7 +129,7 @@ namespace AnomalEvent.Forms
 
         private void richTextBox3_TextChanged(object sender, EventArgs e)
         {
-            Action.FailReaason = (sender as RichTextBox).Text;
+            Action.FailReason = (sender as RichTextBox).Text;
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
@@ -177,6 +180,16 @@ namespace AnomalEvent.Forms
                 }
             }
             this.Close();
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            this.Action.Name = (sender as TextBox).Text;
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            this.Action.ExecutionStatus = (sender as TextBox).Text;
         }
 
 

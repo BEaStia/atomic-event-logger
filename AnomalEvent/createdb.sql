@@ -39,20 +39,21 @@ CREATE TABLE [dbo].[Users] (
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
-CREATE TABLE [dbo].[CorrectiveMeasure]
+CREATE TABLE [dbo].[CorrectiveMeasures]
 (
 	[Id] INT NOT NULL IDENTITY PRIMARY KEY, 
-    [Name] NCHAR(10) NOT NULL, 
-    [ExecutorId] INT NOT NULL, 
-    [DepartmentId] INT NOT NULL, 
-    [CuratorId] INT NOT NULL, 
-    [DateEnd] DATETIME NOT NULL, 
-    [Content] TEXT NOT NULL, 
-    [Compliance] NVARCHAR(255) NOT NULL , 
-    [FailReason] NVARCHAR(255) NOT NULL, 
-    [ExecutionStatus] NVARCHAR(255) NOT NULL, 
+	[Name] NCHAR(10) NOT NULL, 
+	[ExecutorId] INT NOT NULL, 
+	[DepartmentId] INT NOT NULL, 
+	[CuratorId] INT NOT NULL, 
+	[DateEnd] DATETIME NOT NULL, 
+	[Content] TEXT NOT NULL, 
+	[Compliance] NVARCHAR(255) NOT NULL , 
+	[FailReason] NVARCHAR(255) NOT NULL, 
+	[ExecutionStatus] NVARCHAR(255) NOT NULL, 
 	[EventId] INT NOT NULL,
 	[Finished] INT NOT NULL DEFAULT 0,
-    [MemoNumber] NVARCHAR(50) NOT NULL, 
-    [MemoDate] DATETIME NOT NULL
+	[MemoNumber] NVARCHAR(50) NOT NULL, 
+	[MemoDate] DATETIME NOT NULL
 )
+

@@ -170,7 +170,7 @@ namespace AnomalEvent.Classes
         }
     }
 
-    public class CorrectiveAction
+    public class CorrectiveMeasure
     {
         [System.ComponentModel.DataAnnotations.Key]
         public int? Id { get; set; }
@@ -182,7 +182,7 @@ namespace AnomalEvent.Classes
         public DateTime DateEnd { get; set; }
         public String Content { get; set; }
         public String Compliance { get; set; }
-        public String FailReaason { get; set; }
+        public String FailReason { get; set; }
         public String ExecutionStatus { get; set; }
         public int? EventId { get; set; }
         public int? Finished { get; set; }

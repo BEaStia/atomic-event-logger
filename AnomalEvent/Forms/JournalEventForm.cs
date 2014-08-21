@@ -41,8 +41,9 @@ namespace AnomalEvent
             }
 	        //List<AnEvent> events = AnEvent.StationEvents;
 	        Update();
-	        dateTimePicker1.Value = DateTime.Now;
-	        dateTimePicker2.Value = DateTime.Now;
+	        var now = DateTime.Now;
+	        dateTimePicker1.Value = new DateTime(now.Year,now.Month,1);
+	        dateTimePicker2.Value = now;
         }
 
 	    private void Update()
