@@ -149,7 +149,7 @@ namespace AnomalEvent.Classes
         {
             var list = new List<Category>();
             list = AnomalEventConnection.Connection.Query<Category>(@"
-                    SELECT * 
+                    SELECT *
                     FROM Categories").ToList();
             return list;
         }

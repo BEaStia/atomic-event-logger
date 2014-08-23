@@ -38,6 +38,7 @@ namespace AnomalEvent.Forms
                 richTextBox3.Enabled = false;
                 dateTimePicker1.Enabled = false;
                 dateTimePicker2.Enabled = false;
+                checkBox1.Enabled = false;
             }
             textBox2.Enabled = false;
             departments = Department.getList();
@@ -96,6 +97,7 @@ namespace AnomalEvent.Forms
                 Action.EventId = this.anEvent.Id;
                 Action.DateEnd = this.dateTimePicker1.Value;
                 Action.MemoDate = this.dateTimePicker1.Value;
+                Action.Finished = 0;
             }
 
         }

@@ -29,7 +29,8 @@ namespace AnomalEvent
         void addEventForm_Closed(object sender, EventArgs e)
         {
             this.Refresh();
-            Update();
+            this.dataGridView1.Update();
+            UpdateItems();
         }
 
 
@@ -39,22 +40,29 @@ namespace AnomalEvent
             {
                 bindingNavigatorAddNewItem.Enabled = false;
             }
-	        //List<AnEvent> events = AnEvent.StationEvents;
 	        Update();
 	        var now = DateTime.Now;
 	        dateTimePicker1.Value = new DateTime(now.Year,now.Month,1);
 	        dateTimePicker2.Value = now;
         }
 
-	    private void Update()
+	    private void UpdateItems()
 	    {
             DataSet ds = new DataSet();
-            var sql = "select * from AnEvents";
+            var sql = "select Id as Номер, EventDateTime as Дата, Dep_Name as Цех, Cat_Name as Категория, Description as Содержание, Report as Отчет," +
+                      "Reg_Name as Зарегистрировал, Cl_Name as Классифицировал" +
+                      " from [AnEvents]" +
+                      " INNER JOIN (SELECT Id as Reg_Id,Name as Reg_Name FROM [Users]) table1 ON [AnEvents].[RegisteredBy]=table1.[Reg_Id]" +
+                      " INNER JOIN (SELECT Id as Cl_Id,Name as Cl_Name FROM [Users]) table2 ON [AnEvents].[ClassifiedBy]=table2.[Cl_Id]" +
+                      " INNER JOIN (SELECT Id as Dep_Id,Name as Dep_Name FROM [Departments]) table3 ON [AnEvents].[DepartmentId]=table3.[Dep_Id]" +
+                      " INNER JOIN (SELECT Id as Cat_Id,Name as Cat_Name FROM [Categories]) table4 On [AnEvents].[EventCategoryId]=table4.[Cat_Id] " +
+                      "WHERE EventDateTime > '" + dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss") + "' AND EventDateTime < '" + dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss") + "'";
+
             SqlCommand command = new SqlCommand(sql, AnomalEventConnection.Connection);
             SqlDataAdapter da = new SqlDataAdapter(command);
             da.Fill(ds);
-            DataTable dt = ds.Tables[0];
-            dataGridView1.DataSource = dt;
+            DataView dv = ds.Tables[0].DefaultView;
+            dataGridView1.DataSource = dv;
 	    }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -62,7 +70,7 @@ namespace AnomalEvent
             ProgressAddEventForm addEventForm = new ProgressAddEventForm();
             DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
             List<AnEvent> events = AnEvent.getList();
-            var obj = events.Where((x) => x.Id == int.Parse(row.Cells["id"].Value.ToString())).First();
+            var obj = events.Where((x) => x.Id == int.Parse(row.Cells["Номер"].Value.ToString())).First();
             addEventForm.Ev = obj;
             addEventForm.Closed += addEventForm_Closed;
             addEventForm.ShowDialog();
@@ -80,16 +88,7 @@ namespace AnomalEvent
 
 	    void Sort()
 	    {
-            DataSet ds = new DataSet();
-            var sql = "select * from AnEvents";
-            SqlCommand command = new SqlCommand(sql, AnomalEventConnection.Connection);
-            SqlDataAdapter da = new SqlDataAdapter(command);
-            da.Fill(ds);
-            DataView dv = ds.Tables[0].DefaultView;
-            //dataGridView1.DataSource = dt;
-	        dataGridView1.DataSource = dv;
-            var query = "EventDateTime > '" + dateTimePicker1.Value.ToString("yyyy-MM-dd HH:mm:ss") +"' AND EventDateTime < '" + dateTimePicker2.Value.ToString("yyyy-MM-dd HH:mm:ss")+"'";
-	        dv.RowFilter = query;
+	        UpdateItems();
 	    }
 
         private void button1_Click(object sender, EventArgs e)

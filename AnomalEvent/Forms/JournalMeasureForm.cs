@@ -16,9 +16,11 @@ namespace AnomalEvent.Forms
         private List<Department> departments;
         private List<AnEvent> events;
         private List<User> users;
-        public int ExecutorId;
-        public int DepartmentId;
-        public int EventId; 
+        public int ExecutorId=-1;
+        public int DepartmentId=-1;
+        public int EventId=-1;
+        public DateTime start;
+        public DateTime end;
 
         public JournalMeasureForm()
         {
@@ -27,10 +29,12 @@ namespace AnomalEvent.Forms
 
         private void JournalMeasureForm_Load(object sender, EventArgs e)
         {
+            start = new DateTime(DateTime.Now.Year,DateTime.Now.Month,1);
+            end = DateTime.Now;
             users = User.getList().Where((x) => x.IsPerson == 1).ToList();
             departments = Department.getList();
             events = AnEvent.getList();
-            Update();
+            UpdateItems();
             foreach (var user in users)
             {
                 comboBox1.Items.Add(user.Name);
@@ -56,15 +60,43 @@ namespace AnomalEvent.Forms
             }
         }
 
-        private void Update()
+        public new void Update()
+        {
+            UpdateItems();
+            base.Update();
+        }
+
+        private void UpdateItems()
         {
             DataSet ds = new DataSet();
-            var sql = "select * from CorrectiveMeasures";
-            SqlCommand command = new SqlCommand(sql, AnomalEventConnection.Connection);
+            var query = "select [Id] as 'Номер' ,[Name] as 'Наименование' " +
+                      ",[Ex_Name] as 'Исполнитель', [Dep_Name] as 'Цех' ," +
+                      "[Cur_Name] as 'Куратор' ,[DateEnd] as 'Дата' ,[Content] as 'Содержание' ,[ExecutionStatus] as 'Статус выполнения', " +
+                      "[EventId] as 'Номер события' " +
+                      "from CorrectiveMeasures"
+                      +
+                      " INNER JOIN (SELECT Id as Ex_Id, Name as Ex_Name FROM Users) table1 ON CorrectiveMeasures.ExecutorId=table1.Ex_Id" +
+                      " INNER JOIN (SELECT Id as Cur_Id, Name as Cur_Name FROM Users) table2 ON CorrectiveMeasures.CuratorId=table2.Cur_Id" +
+                      " INNER JOIN (SELECT ID as Dep_Id, Name as Dep_Name FROM Users) table3 ON CorrectiveMeasures.DepartmentId=table3.Dep_Id" +
+                      " WHERE DateEnd > '" + start.ToString("yyyy-MM-dd HH:mm:ss") + "' AND DateEnd < '" +
+                      end.ToString("yyyy-MM-dd HH:mm:ss") + "'";
+                    if (DepartmentId != -1)
+                    {
+                        query += " AND Dep_Id = " + DepartmentId;
+                    }
+                    if (ExecutorId != -1)
+                    {
+                        query += " AND Ex_Id = " + ExecutorId;
+                    }
+                    if (EventId != -1)
+                    {
+                        query += " AND EventId = " + EventId;
+                    }
+            SqlCommand command = new SqlCommand(query, AnomalEventConnection.Connection);
             SqlDataAdapter da = new SqlDataAdapter(command);
             da.Fill(ds);
-            DataTable dt = ds.Tables[0];
-            dataGridView1.DataSource = dt;
+            DataView dv = ds.Tables[0].DefaultView;
+            dataGridView1.DataSource = dv;
         }
 
         private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
@@ -84,12 +116,40 @@ namespace AnomalEvent.Forms
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-                    
+            var name = int.Parse((sender as ComboBox).SelectedItem.ToString());
+            this.EventId = name;
+            UpdateItems();
         }
 
         private void bndMain_RefreshItems(object sender, EventArgs e)
         {
 
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var name = (sender as ComboBox).SelectedItem;
+            this.DepartmentId = departments.First((x) => x.Name == name).Id.Value;
+            UpdateItems();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var name = (sender as ComboBox).SelectedItem;
+            this.ExecutorId = users.First((x) => x.Name == name).Id.Value;
+            UpdateItems();
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            start = (sender as DateTimePicker).Value;
+            UpdateItems();
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            end = (sender as DateTimePicker).Value;
+            UpdateItems();
         }
 
 
