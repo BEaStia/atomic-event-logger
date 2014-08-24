@@ -187,8 +187,7 @@ namespace AnomalEvent
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var category = categories.First(x => x.Name == (sender as ComboBox).SelectedItem.ToString());
-            Ev.DepartmentId = category.Id;
-            Ev.EventCategoryId = CategoryComboBox.SelectedIndex;
+            Ev.EventCategoryId = category.Id;
         }
 
         private void ClassifiedByComboBox_SelectedIndexChanged(object sender, EventArgs e)
